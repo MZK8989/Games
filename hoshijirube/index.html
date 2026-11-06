@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#050914" />
+  <title>星標</title>
+  <script type="module" crossorigin src="./assets/index-Dqj6qCRF.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-g1X_scOE.css">
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <div id="hud" hidden>
+    <div class="top">
+      <div class="leftcol">
+        <div class="pill" id="hud-round"></div>
+        <button type="button" class="pill btn-pill" id="btn-exit" hidden>終了</button>
+        <button type="button" class="pill btn-pill" id="btn-hud-guide" hidden>探し方</button>
+      </div>
+      <div class="target" id="hud-target"></div>
+      <div class="rightcol">
+        <div class="pill" id="hud-time">0.0秒</div>
+        <button type="button" class="pill btn-pill" id="btn-lines" hidden>星座線 ON</button>
+        <button type="button" class="pill btn-pill" id="btn-names" hidden>名前 ON</button>
+      </div>
+    </div>
+    <div class="date" id="hud-date" hidden></div>
+    <div class="bottom">
+      <div class="subrow">
+        <button type="button" class="btn sub" id="btn-reset">視点リセット</button>
+        <button type="button" class="btn sub" id="btn-gyro">ジャイロ OFF</button>
+        <button type="button" class="btn sub" id="btn-answer" hidden>答え</button>
+      </div>
+      <button type="button" class="btn main" id="btn-decide">決定</button>
+    </div>
+  </div>
+
+  <section class="screen" id="screen-title">
+    <h1>星標<small>ほししるべ</small></h1>
+    <p class="lead">星空だけを頼りに、方角を探す。</p>
+    <div class="seg" id="seg-diff" role="group" aria-label="難易度"></div>
+    <ul class="rules">
+      <li>日本の夜空（0時）。地平線の下は見えません。</li>
+      <li>スワイプで視点を回し、中央の十字を探す方角に合わせて「決定」。</li>
+      <li>方角のズレと時間で採点。3ラウンド。</li>
+    </ul>
+    <button type="button" class="btn main wide" id="btn-play">観測をはじめる</button>
+    <button type="button" class="btn sub wide" id="btn-practice">練習（星座線・星の名前つき）</button>
+    <div class="links"><button type="button" class="link" id="btn-guide">方角の探し方</button><button type="button" class="link" id="btn-credits">クレジット</button></div>
+    <div class="best" id="best"></div>
+  </section>
+
+  <section class="sheet" id="screen-result" hidden>
+    <div class="rep-cap" id="res-cap"></div>
+    <table class="rep" id="res-table"></table>
+    <div class="verdict" id="res-head"></div>
+    <button type="button" class="btn main wide" id="btn-next">次へ</button>
+  </section>
+
+  <section class="screen" id="screen-final" hidden>
+    <div class="rep-cap big">観測報告</div>
+    <div class="rep-sub" id="final-meta"></div>
+    <table class="rep" id="final-table"></table>
+    <div class="rank-line">評価<span class="rank" id="final-rank"></span></div>
+    <button type="button" class="btn main wide" id="btn-again">もう一度</button>
+    <button type="button" class="btn sub wide" id="btn-title">タイトルへ</button>
+  </section>
+
+  <section class="screen scroll" id="screen-guide" hidden>
+    <div class="guide-head"><div class="rep-cap big">方角の探し方</div><button type="button" class="x" id="btn-guide-x" aria-label="閉じる">✕</button></div>
+    <div class="guide" id="guide-body"></div>
+    <button type="button" class="btn sub wide" id="btn-guide-close">もどる</button>
+  </section>
+
+  <section class="screen" id="screen-credits" hidden>
+    <div class="rep-cap big">クレジット</div>
+    <div class="credits-body">
+      <p>星の位置と明るさ: ESA, <i>The Hipparcos and Tycho Catalogues</i> (ESA SP-1200, 1997)。CC BY-NC 3.0 IGO。<b>Credit: ESA</b></p>
+      <p>データは NASA HEASARC 経由で取得し、6等までの星を抽出して形式を変換しています。</p>
+      <p>フォント: Shippori Mincho、Klee One（Google Fonts、SIL OFL）。</p>
+      <p>星の固有名: IAU Working Group on Star Names（国際天文学連合）。</p>
+      <p>星座線・和名の表記・計算・描画は自作です。月と惑星は表示していません。</p>
+      <p>非営利の個人制作です。</p>
+    </div>
+    <button type="button" class="btn sub wide" id="btn-credits-close">閉じる</button>
+  </section>
+
+  <div id="toast" hidden></div>
+</body>
+</html>
