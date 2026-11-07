@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#f3d9b1" />
+  <title>どんぐり鑑定士</title>
+  <script type="module" crossorigin src="./assets/index-CGXHSZIu.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B_wNNCxb.css">
+</head>
+<body>
+  <canvas id="stage"></canvas>
+
+  <div id="hud" hidden>
+    <div class="pill" id="hud-score"><span>とくてん</span><b id="score">0</b></div>
+    <div class="pill" id="hud-time"><b id="time">60</b><i id="timebar"></i></div>
+  </div>
+
+  <button id="btn-sound" class="icon-btn" type="button" aria-label="効果音">
+    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path class="on" d="M16 9a4 4 0 0 1 0 6"/>
+      <path class="on" d="M18.5 6.5a8 8 0 0 1 0 11"/>
+      <path class="off" d="M16 9l5 6M21 9l-5 6"/>
+    </svg>
+  </button>
+
+  <div id="labels"></div>
+  <div id="trash-label">▼ すてる</div>
+  <div id="popups"></div>
+  <div id="bigtext"></div>
+
+  <div id="overlay" hidden>
+    <div class="card" id="card"></div>
+  </div>
+
+</body>
+</html>
