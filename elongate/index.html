@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#031a24" />
+  <title>ELONGATE</title>
+  <script type="module" crossorigin src="./assets/index-g7QWroWv.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BE9XhS0c.css">
+</head>
+<body>
+  <div id="app" data-screen="title">
+    <div id="stage">
+      <canvas id="cv" aria-label="リボソームとアミノ酸"></canvas>
+
+      <div class="hud" id="hud">
+        <div class="count"><span class="k">残基</span><span class="v" id="hud-n">1</span></div>
+        <div class="side">
+          <button class="icon" id="btn-sfx" type="button" aria-pressed="true" aria-label="効果音">音</button>
+        </div>
+      </div>
+      <p class="hint" id="hint">なぞって、リボソームを動かそう</p>
+
+      <!-- タイトル -->
+      <section class="panel title" id="s-title" aria-labelledby="t-h">
+        <h1 id="t-h" class="logo">ELONGATE</h1>
+        <p class="tag">リボソームでペプチド鎖を伸ばす</p>
+        <p class="desc">降ってくるアミノ酸をキャッチして、鎖を伸ばす。<br />赤い輪の <b>Ac</b> だけは避ける。</p>
+        <button class="go" id="btn-go" type="button">はじめる</button>
+        <p class="best" id="t-best"></p>
+        <button class="link" id="btn-help" type="button">あそびかた</button>
+      </section>
+
+      <!-- 一時停止 -->
+      <section class="panel pause" id="s-pause" aria-label="一時停止">
+        <p class="p-title">一時停止</p>
+        <button class="go" id="btn-resume" type="button">つづける</button>
+      </section>
+
+      <!-- 結果 -->
+      <section class="panel result" id="s-result" aria-labelledby="r-h">
+        <div class="r-body">
+          <p class="kicker">Ac がつながって、リボソームが停止</p>
+          <h2 id="r-h" class="r-n"><span id="r-n">0</span><span class="unit">残基</span></h2>
+          <p class="r-rank" id="r-rank"></p>
+          <p class="r-best" id="r-best"></p>
+          <div class="seq" id="r-seq" aria-label="アミノ酸配列"></div>
+          <p class="r-meta" id="r-mw"></p>
+          <p class="r-meta" id="r-ref"></p>
+          <div id="r-famous"></div>
+          <div class="actions">
+            <button class="go" id="btn-again" type="button">もういちど</button>
+          </div>
+        </div>
+      </section>
+
+      <dialog id="help-dialog" aria-labelledby="help-h">
+        <h2 id="help-h" class="d-h">あそびかた</h2>
+        <ol class="d-list">
+          <li>画面をなぞると、リボソームがその位置へ、コドン（3塩基）ずつ進みます。PC は ← →。</li>
+          <li>光る受け口を通ったアミノ酸が鎖につき、鎖は丸まっていきます。</li>
+          <li>取りこぼしてもペナルティはありません。</li>
+          <li>赤い輪の「Ac」はアセチルキャップ付き。つくと鎖が止まって終了です。</li>
+          <li>鎖が伸びるほどリボソームは重くなり、1歩が遅くなります。向きを変えるときは、さらに遅くなります。</li>
+        </ol>
+        <form method="dialog"><button class="go" type="submit">とじる</button></form>
+      </dialog>
+    </div>
+  </div>
+</body>
+</html>
