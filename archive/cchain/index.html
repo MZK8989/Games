@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#e7f0f4" />
+  <title>伸ばせ！炭素鎖！</title>
+  <script type="module" crossorigin src="./assets/index-CKN7Ng_X.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CmObKcqj.css">
+</head>
+<body>
+  <div id="app" data-screen="title">
+    <header class="top">
+      <div class="brand" aria-hidden="true">
+        <svg viewBox="0 0 64 28" width="48" height="21"><path d="M2 20 L14 8 L26 20 L38 8 L50 20 L62 8" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="brand-name">伸ばせ！炭素鎖！</span>
+      </div>
+      <div class="tools">
+        <button id="sfx" class="tool" type="button" aria-pressed="true">音 ON</button>
+        <button id="help" class="tool" type="button">あそびかた</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- タイトル -->
+      <section class="screen" id="s-title" aria-labelledby="hero">
+        <h1 id="hero" class="hero">伸ばせ！<br />炭素鎖！</h1>
+        <p class="lead">試薬のビンを選んで反応させ、炭素の鎖を伸ばそう。もう反応する場所がなくなったら完成。できた分子には、ちゃんとした名前がつきます。</p>
+        <div class="hero-panel">
+          <svg class="hero-chain" viewBox="0 0 520 90" aria-hidden="true" preserveAspectRatio="xMinYMid meet">
+            <polyline class="hc-line" pathLength="1" points="8,60 48,38 88,60 128,38 168,60 208,38 248,60 288,38 328,60 368,38 408,60 448,38 488,60" />
+            <circle class="hc-dot" cx="488" cy="60" r="9" />
+          </svg>
+        </div>
+        <div class="title-actions">
+          <button id="go" class="btn primary" type="button">実験をはじめる</button>
+          <p class="best" id="best"></p>
+        </div>
+      </section>
+
+      <!-- 最初の分子を選ぶ -->
+      <section class="screen" id="s-start" aria-labelledby="start-h">
+        <h2 id="start-h" class="h2">最初の分子を選ぶ</h2>
+        <p class="sub">サンプル瓶から1つ。ここから鎖を伸ばしていきます。</p>
+        <div id="starts" class="starts"></div>
+      </section>
+
+      <!-- あそぶ -->
+      <section class="screen" id="s-play" aria-label="実験中">
+        <div class="readouts" aria-live="polite">
+          <div class="ro"><span class="ro-k">炭素の数</span><span class="ro-v" id="ro-c">0</span></div>
+          <div class="ro"><span class="ro-k">分子量</span><span class="ro-v" id="ro-mw">0</span></div>
+          <div class="ro"><span class="ro-k">手数</span><span class="ro-v" id="ro-s">0</span></div>
+          <div class="ro"><span class="ro-k">名前の長さ</span><span class="ro-v" id="ro-l">0</span></div>
+        </div>
+
+        <h2 class="h3" id="shelf-h">反応させる分子を選ぶ</h2>
+        <div class="shelf" id="shelf" aria-labelledby="shelf-h"></div>
+        <div class="plank" aria-hidden="true"></div>
+
+        <div class="bench" id="bench">
+          <div class="stream" id="stream" aria-hidden="true"></div>
+          <div class="bench-head">
+            <span class="bench-title">実験台</span>
+            <span class="banner" id="banner" aria-live="polite"></span>
+          </div>
+          <div class="scroller" id="scroller"><div id="mol"></div></div>
+        </div>
+
+        <div class="nameplate">
+          <div class="np-k">いまの名前</div>
+          <p id="name" class="np-v"></p>
+        </div>
+
+        <details class="notebook" id="notebook">
+          <summary>実験ノート <span id="nb-count"></span></summary>
+          <ol id="log" class="log"></ol>
+        </details>
+      </section>
+
+      <!-- 結果 -->
+      <section class="screen" id="s-result" aria-labelledby="r-h">
+        <div class="stamp" aria-hidden="true">反応終了</div>
+        <h2 id="r-h" class="h3">できあがった分子の名前</h2>
+        <p id="r-name" class="r-name"></p>
+        <div class="bench result-bench"><div class="scroller" id="r-scroller"><div id="r-mol"></div></div></div>
+        <dl class="stats" id="stats"></dl>
+        <div class="rank" id="rank"></div>
+        <div class="actions">
+          <button id="again" class="btn primary" type="button">もういちど実験する</button>
+          <button id="copy" class="btn" type="button">名前をコピー</button>
+        </div>
+        <details class="notebook">
+          <summary>実験ノートを見返す</summary>
+          <ol id="r-log" class="log"></ol>
+        </details>
+      </section>
+    </main>
+
+    <dialog id="help-dialog" aria-labelledby="help-h">
+      <h2 id="help-h" class="h3">あそびかた</h2>
+      <ol class="rules">
+        <li>分子の右はし（黄色い枠）が「反応点」。いつも1か所だけです。</li>
+        <li>棚から、反応させる分子のビンを1つ選ぶ。反応性は ★ の数で分かります。</li>
+        <li>反応すると鎖が伸び、新しい反応点ができます。炭素が減る反応もあります。</li>
+        <li>反応点がなくなったら完成。炭素の数と、長い名前ほど高得点です。</li>
+        <li>反応性が低い組み合わせ（★1つ）でも、構造が正しければ反応したことにします。</li>
+      </ol>
+      <form method="dialog"><button class="btn primary" type="submit">とじる</button></form>
+    </dialog>
+  </div>
+</body>
+</html>
