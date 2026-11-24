@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="缶を傾け、揺らして、スープを残さず飲む実験ゲーム。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ゲーム集" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:title" content="缶底残留固形物の最適排出論 | ゲーム集" />
+  <meta property="og:description" content="缶を傾け、揺らして、スープを残さず飲む実験ゲーム。" />
+  <meta property="og:url" content="https://mzk8989.github.io/Games/corneject/" />
+  <meta property="og:image" content="https://mzk8989.github.io/Games/corneject/ogp.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="缶底残留固形物の最適排出論 | ゲーム集" />
+  <meta name="twitter:description" content="缶を傾け、揺らして、スープを残さず飲む実験ゲーム。" />
+  <meta name="twitter:image" content="https://mzk8989.github.io/Games/corneject/ogp.png" />
+  <meta name="theme-color" content="#fbfbf9" />
+  <title>缶底残留固形物の最適排出論</title>
+  <script type="module" crossorigin src="./assets/index-DIeI5-FK.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CgDpxGwh.css">
+</head>
+<body>
+  <div id="app" data-phase="menu" data-mode="practice">
+    <header class="mast">
+      <div class="mast-id">
+        <span id="run-label">Run 001</span><span class="sep">/</span><span id="mode-label">練習（透明缶）</span>
+      </div>
+      <button id="btn-sound" type="button" class="snd" aria-pressed="true" aria-label="効果音と振動">音 ON</button>
+      <div class="mast-clock" id="clock">00.0<small> s</small></div>
+    </header>
+
+    <section class="figure" aria-label="Fig. 1">
+      <div class="frame" id="stage">
+        <canvas id="gl"></canvas>
+        <i class="tick tl"></i><i class="tick tr"></i><i class="tick bl"></i><i class="tick br"></i>
+        <div class="stage-msg" id="stage-msg" hidden></div>
+      </div>
+      <div class="cap cap-below"><b>Fig. 1</b><span id="fig-cap">缶体内部。黄: コーン粒、青: 液体、赤線: 飲み口の段差。</span></div>
+    </section>
+
+    <section class="data">
+      <div class="tbl">
+        <div class="cap"><b>Table 1</b><span>測定値</span></div>
+        <dl class="rows">
+          <div><dt>傾斜角 θ</dt><dd><span id="v-tilt">0.0</span><small>°</small></dd></div>
+          <div class="minor"><dt>最大傾斜角</dt><dd><span id="v-tiltmax">0</span><small>°</small></dd></div>
+          <div><dt>注ぎ回数</dt><dd><span id="v-pours">0</span></dd></div>
+          <div class="minor"><dt>揺動速度</dt><dd><span id="v-speed">0</span><small> mm/s</small></dd></div>
+          <div class="minor"><dt>回転速度</dt><dd><span id="v-omega">0.0</span><small> rad/s</small></dd></div>
+          <div><dt>流出質量</dt><dd><span id="v-mass">0.0</span><small> g</small></dd></div>
+          <div class="practice-only"><dt>排出コーン</dt><dd><span id="v-kernels">0</span><small id="v-ktotal"> / 65</small></dd></div>
+          <div class="practice-only"><dt>段差付着</dt><dd class="stuck"><span id="v-stuck">0</span><small> 粒</small></dd></div>
+        </dl>
+      </div>
+      <div class="chart">
+        <canvas id="chart"></canvas>
+        <div class="cap cap-below"><b>Fig. 2</b><span>流出質量[g]の時間変化（横軸 s）</span></div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="ctl">
+        <div class="cap"><b>回す</b></div>
+        <div class="dial" id="dial" aria-label="回転ダイヤル"><div class="dial-marks"></div><div class="dial-needle"></div></div>
+      </div>
+      <div class="ctl">
+        <div class="cap"><b>揺らす</b></div>
+        <div class="pad" id="pad" aria-label="揺らしパッド"><div class="pad-grid"></div><div class="pad-dot"></div></div>
+      </div>
+      <div class="ctl btns">
+        <div class="btn-pair practice-only">
+          <button id="btn-trail" type="button" aria-pressed="false">軌跡</button>
+          <button id="btn-slow" type="button" aria-pressed="false">スロー</button>
+        </div>
+        <div class="btn-pair">
+          <button id="btn-upright" type="button">起こす</button>
+          <button id="btn-reset" type="button" class="practice-only">リセット</button>
+        </div>
+        <button id="btn-finish" type="button" class="primary">測定終了</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="sheet" id="sheet-menu">
+    <article class="paper menu">
+      <div class="menu-body">
+      <p class="journal">Corneject Lab. 技術報告 第1号</p>
+      <h1>缶底残留固形物の最適排出論</h1>
+      <p class="sub">コーンスープを残さず飲むために</p>
+      <p class="en">On the Optimal Discharge of Residual Solids at the Bottom of a Can</p>
+
+      <h2>実験条件</h2>
+      <table class="cond">
+        <tr><th scope="row"><label for="sel-mode">試験モード</label></th>
+          <td><select id="sel-mode">
+            <option value="practice">練習（透明缶・内部が見える）</option>
+            <option value="main">本実験（不透明缶・開缶で確認）</option>
+          </select></td></tr>
+        <tr><th scope="row"><label for="sel-visc">液体の粘度</label></th>
+          <td><select id="sel-visc">
+            <option value="low">低</option><option value="std" selected>標準</option><option value="high">高</option>
+          </select></td></tr>
+        <tr><th scope="row"><label for="sel-kernels">粒の数</label></th>
+          <td><select id="sel-kernels">
+            <option value="std" selected>標準（65粒）</option><option value="many">多め（90粒）</option>
+          </select></td></tr>
+        <tr><th scope="row"><label for="sel-input">操作方法</label></th>
+          <td><select id="sel-input">
+            <option value="gyro">傾きセンサー</option><option value="touch">タッチ</option>
+          </select></td></tr>
+        <tr><th scope="row"><label for="sel-quality">計算の品質</label></th>
+          <td><select id="sel-quality">
+            <option value="auto" selected>自動</option><option value="high">高（重い）</option><option value="std">標準</option><option value="light">軽い</option>
+          </select></td></tr>
+      </table>
+      <p class="note" id="input-note"></p>
+      </div>
+
+      <div class="menu-foot">
+        <div class="startrow">
+          <button id="btn-start" type="button" class="primary wide">実験開始</button>
+          <button id="btn-log" type="button" class="wide">記録</button>
+        </div>
+        <p class="refs disclaimer">注: 本ゲームは遊びやすさのためにパラメータを調整したものであり、実データや実際の挙動を再現するものではない。</p>
+        <p class="refs"><b>Reference:</b> Kaminishizono, T. ; Koyanagi, T. <i>新潟国際情報大学情報文化学部紀要</i>, <b>2016</b>, <i>2</i>, 96-102.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="sheet" id="sheet-result" hidden>
+    <article class="paper">
+      <p class="journal" id="r-run">Run 001</p>
+      <h1 class="small">結果</h1>
+      <div class="big"><span id="r-rate">0</span><small>%</small></div>
+      <p class="bigcap">排出率（<span id="r-out">0</span> / <span id="r-total">65</span> 粒）</p>
+      <table class="res">
+        <caption>Table 2　補助パラメータ</caption>
+        <tbody>
+          <tr><th scope="row">残留粒数</th><td id="r-left">0</td></tr>
+          <tr><th scope="row">最大傾斜角</th><td id="r-tilt">0°</td></tr>
+          <tr><th scope="row">注ぎ回数</th><td id="r-pours">0</td></tr>
+          <tr><th scope="row">揺動速度（最大 / 平均）</th><td id="r-speed">0 / 0 mm/s</td></tr>
+          <tr><th scope="row">回転速度（最大 / 平均）</th><td id="r-omega">0 / 0 rad/s</td></tr>
+          <tr><th scope="row">回転量</th><td id="r-spin">0.0 周</td></tr>
+          <tr><th scope="row">所要時間</th><td id="r-time">0.0 s</td></tr>
+          <tr><th scope="row">流出質量</th><td id="r-mass">0.0 g</td></tr>
+          <tr><th scope="row">こぼし量</th><td id="r-spill">0.0 g</td></tr>
+        </tbody>
+      </table>
+      <p class="note" id="r-note"></p>
+      <p class="note">注: ゲーム用に調整した値であり、実データや実際の挙動を再現するものではない。</p>
+      <div class="btnrow">
+        <button id="btn-again" type="button" class="primary">同じ条件で再実験</button>
+        <button id="btn-menu" type="button">条件を変える</button>
+        <button id="btn-result-log" type="button">記録を見る</button>
+      </div>
+    </article>
+  </div>
+
+  <div class="sheet" id="sheet-log" hidden>
+    <article class="paper log">
+      <div class="log-body">
+        <p class="journal">記録・データ分析</p>
+        <h1 class="small">記録</h1>
+        <p class="note nomargin">本実験の試行だけを記録する（練習は記録されない）。</p>
+
+        <h2>データセット</h2>
+        <div class="dsrow">
+          <select id="log-ds" aria-label="データセット"></select>
+          <button id="log-new" type="button" data-arm="1">新規</button>
+          <button id="log-del" type="button" data-arm="1">削除</button>
+          <button id="log-clear" type="button" data-arm="1">全消去</button>
+        </div>
+        <p class="note" id="log-info"></p>
+
+        <h2>絞り込み</h2>
+        <div class="filters">
+          <label>粘度 <select id="log-visc"><option value="all">すべて</option><option value="low">低</option><option value="std">標準</option><option value="high">高</option></select></label>
+          <label>粒数 <select id="log-kern"><option value="all">すべて</option><option value="std">標準</option><option value="many">多め</option></select></label>
+        </div>
+        <p class="note" id="log-count"></p>
+
+        <h2>試行一覧</h2>
+        <div class="scrollx"><table class="res runs"><thead><tr><th>#</th><th>粘度／粒</th><th>排出率</th><th>注ぎ</th><th>最大角</th><th>時間</th></tr></thead><tbody id="log-runs"></tbody></table></div>
+
+        <h2>統計</h2>
+        <div class="scrollx"><table class="res stats"><thead><tr><th>項目</th><th>n</th><th>平均</th><th>不偏分散</th><th>SD</th><th>RSD %</th><th>最小</th><th>最大</th></tr></thead><tbody id="log-stats"></tbody></table></div>
+        <p class="note">RSD ＝ 標準偏差 ÷ 平均 × 100。n が1のときの分散・SD・RSD、平均が0のときの RSD は「—」。</p>
+
+        <h2>散布図</h2>
+        <div class="axes">
+          <label>X <select id="sc-x"></select></label>
+          <label>Y <select id="sc-y"></select></label>
+        </div>
+        <canvas id="sc-canvas" class="scatter"></canvas>
+        <p class="mono" id="sc-r"></p>
+
+        <h2>相関行列</h2>
+        <div class="scrollx"><table class="corr" id="log-corr"></table></div>
+        <p class="note">相関は因果を意味しない。n が小さいと、相関係数は不安定になる。</p>
+      </div>
+      <div class="menu-foot"><button id="log-close" type="button" class="primary wide">閉じる</button></div>
+    </article>
+  </div>
+
+  <div class="sheet loading" id="loading" hidden>
+    <article class="paper">
+      <p class="journal">試料調製</p>
+      <h1 class="small">試料を調製中</h1>
+      <div class="bar"><i id="load-bar"></i></div>
+      <p class="note" id="load-note">缶に液体とコーン粒を詰めて、静置している。</p>
+    </article>
+  </div>
+
+</body>
+</html>

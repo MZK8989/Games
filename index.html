@@ -146,7 +146,8 @@
     sprout: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle class="f2" cx="48" cy="16" r="8"/><path class="s1" d="M30 58V28" stroke-width="5" stroke-linecap="round"/><path class="f1" d="M30 36C18 36 11 29 10 18c12 0 19 6 20 18z"/><path class="f1" d="M30 28c0-11 7-17 19-17 0 11-7 17-19 17z"/></svg>',
     chain: '<svg viewBox="0 0 64 64" aria-hidden="true"><path class="s2" d="M12 46C22 46 20 22 32 22s10 22 20 22" stroke-width="3.5" stroke-linecap="round"/><g class="f1"><circle cx="12" cy="46" r="7"/><circle cx="32" cy="22" r="9"/><circle cx="52" cy="44" r="6"/></g></svg>',
     globe: '<svg viewBox="0 0 64 64" aria-hidden="true"><g class="s1" stroke-width="3"><circle cx="32" cy="32" r="25"/><ellipse cx="32" cy="32" rx="11" ry="25"/><path d="M8 24h48M8 40h48"/></g></svg>',
-    road: '<svg viewBox="0 0 64 64" aria-hidden="true"><path class="f1" d="M27 14h10l19 44H8z"/><g class="s2" stroke-width="3" stroke-linecap="round"><path d="M32 24v5M32 35v7M32 48v8"/></g><circle class="f2" cx="32" cy="8" r="4"/></svg>'
+    road: '<svg viewBox="0 0 64 64" aria-hidden="true"><path class="f1" d="M27 14h10l19 44H8z"/><g class="s2" stroke-width="3" stroke-linecap="round"><path d="M32 24v5M32 35v7M32 48v8"/></g><circle class="f2" cx="32" cy="8" r="4"/></svg>',
+    can: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect class="f1" x="15" y="12" width="34" height="46" rx="4"/><ellipse class="f2" cx="32" cy="12" rx="17" ry="5"/><g class="f2"><circle cx="25" cy="49" r="3.4"/><circle cx="34" cy="50" r="3.4"/><circle cx="41" cy="48" r="3"/><circle cx="30" cy="42" r="3"/></g></svg>'
   };
   /* "added" is the day each game was first published (from the Games history) */
   var GAMES = [
@@ -156,7 +157,8 @@
     { k: 'sprout', h: 'growup', added: '2026-11-08', n: 'ぐんぐん育て、どこまでも！', d: '太陽を動かして、植物を草原から宇宙まで伸ばすゲーム', c: '#3f9d5f', a: '#3f9d5f', b: '#f5b82e' },
     { k: 'chain', h: 'elongate', added: '2026-11-09', n: 'ELONGATE', d: 'リボソームを動かして、降ってくるアミノ酸をキャッチし、ペプチド鎖を伸ばすゲーム', c: '#d6457b', a: '#d6457b', b: '#f1a7c3' },
     { k: 'globe', h: 'madatasukaru', added: '2026-11-17', n: 'どこ？マダガスカル！', d: '3Dの地球を回して、お題の国を探すゲーム。速さとヒントで得点が決まる', c: '#1f8fb5', a: '#1f8fb5', b: '#1f8fb5' },
-    { k: 'road', h: 'kaerimichi', added: '2026-11-23', n: '帰り道', d: '目覚めた街で、遠くの光を目指すゲーム', c: '#6f8294', a: '#6f8294', b: '#e4572e' }
+    { k: 'road', h: 'kaerimichi', added: '2026-11-23', n: '帰り道', d: '目覚めた街で、遠くの光を目指すゲーム', c: '#6f8294', a: '#6f8294', b: '#e4572e' },
+    { k: 'can', h: 'corneject', added: '2026-11-24', n: '缶底残留固形物の最適排出論', d: '缶を傾け、揺らして、スープを残さず飲む実験ゲーム', c: '#e0a800', a: '#6b7c8a', b: '#d99a00' }
   ];
   var items = GAMES.map(function (g, i) {
     var li = document.createElement('li');
